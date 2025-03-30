@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Yogurt Cafeteros</title>
+    <style>
+        :root {
+            --forest-green: #8B4513;
+            --white: #ffffff;
+            --terracotta: #c97c5d;
+            --light-green: #D4AF37;
+            --cream: #F5F5DC;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--cream);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--forest-green);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--terracotta);
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("Fondo.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .hero1 {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("Fondo.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+        
+        .hero1 h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero1 p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--terracotta);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #b66c4d;
+        }
+        
+        /* Sections common */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--forest-green);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--terracotta);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--forest-green);
+        }
+        
+        .product-info p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .product-info .btn {
+            font-size: 14px;
+            padding: 8px 20px;
+        }
+        
+        /* Mission & Vision Section */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .mission-card, .vision-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mission-card h3, .vision-card h3 {
+            color: var(--forest-green);
+            font-size: 24px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .mission-card h3::after, .vision-card h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--terracotta);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .mission-card::before, .vision-card::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(201, 124, 93, 0.1);
+            border-radius: 50%;
+            top: -50px;
+            right: -50px;
+        }
+        
+        /* History Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--forest-green);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--white);
+            border: 4px solid var(--terracotta);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--white);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .year {
+            font-weight: 700;
+            color: var(--terracotta);
+            margin-bottom: 10px;
+        }
+        
+        /* Impact Section */
+        .map.container {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("local.jpeg");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--forest-green);
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form h3 {
+            color: var(--forest-green);
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+        }
+        
+        /* Blog Preview */
+        .blog-preview {
+            padding: 60px 0;
+            background-color: var(--light-green);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .blog-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-content h3 {
+            margin-bottom: 10px;
+            color: var(--forest-green);
+        }
+        
+        .blog-content p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .blog-date {
+            font-size: 14px;
+            color: var(--terracotta);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--forest-green);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+    background-color: var(--forest-green);
+    color: #ffffff;
+    padding: 2rem 5cm;
+    margin-top: 3rem;
+    font-size: 0.9em;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section h4 {
+    color: #c8e6c9;
+    margin-bottom: 1rem;
+    font-size: 1.1em;
+    border-bottom: 2px solid var(--light-green);
+    padding-bottom: 0.5rem;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-list li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.footer-list a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-list a:hover {
+    color: var(--light-green);
+    text-decoration: underline;
+}
+
+.social-media {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    color: #ffffff;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    color: var(--light-green);
+}
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                height: 92vh;
+                top: 8vh;
+                background-color: var(--forest-green);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                z-index: 5;
+            }
+            
+            .nav-links li {
+                opacity: 0;
+                margin: 20px 0;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .nav-active {
+                transform: translateX(0%);
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Yogurt Cafeteros</a>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#Nosotros">Sobre Nosotros</a></li>
+                    <li><a href="#productos">Presentaciones</li>
+                    <li><a href="#impacto">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Yogurt Cafeteros: Tu momento gourmet, hecho saludable.</h1>
+            <p>Yogurt de café</p>
+            <a href="#productos" class="btn">Descubre nuestras presentaciones</a>
+        </div>
+    </section>
+    
+    <!-- Mission and Vision Section -->
+    <section id="Nosotros" style="background-color: var(--white);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nosotros</h2>
+                <p>Comprometidos con la calidad y el desarrollo sostenible</p>
+            </div>
+            
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <h3>Misión</h3>
+                    <p>Somos una empresa colombiana capaz de producir una línea de yogurt, con sabor a café sin azúcar, hecho artesanalmente. Logrando un avance significativo en el desarrollo de  la industria apoyando la producción láctea y cafetera del municipio de La Calera.
+                    </p>
+                </div>
+                
+                <div class="vision-card">
+                    <h3>Visión</h3>
+                    <p>Ser una empresa líder en un lapso no mayor a 3 años en la comercialización de yogurt con sabor a café sin azúcar hecho artesanalmente, con una linea de producción estructurada de forma eficiente, capaz de elevar el consumo de la combinación  entre la leche y el café a nivel nacional. A largo plazo ser una empresa con cubrimiento nacional en donde todos los colombianos se identifiquen y consuman nuestro producto como primera opción. En un periodo más largo de tiempo ser una empresa multinacional con presencia en la mayor parte de Latinoamérica.</p>
+                </div>
+            </div>
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <h3>Valores</h3>
+                    <p><strong>Compromiso: </strong> Nos comprometemos con la excelencia en cada yogur con sabor a café que producimos. Además, apostamos por la sostenibilidad, adoptando prácticas que minimicen nuestro impacto ambiental y apoyen a las comunidades cafetaleras, garantizando un abastecimiento ético y responsable.</p><br>
+                    <p><strong>Lealtad:</strong> Fomentamos la lealtad tanto dentro como fuera de la empresa. Nuestros empleados comparten y promueven nuestros valores, mientras que nuestros clientes confían en nosotros gracias a la calidad constante de nuestros productos y a un servicio excepcional que refuerza nuestra relación a largo plazo.</p><br>
+                    <p><strong>Responsabilidad: </strong> Nuestra responsabilidad abarca desde garantizar la seguridad alimentaria y la higiene en cada etapa del proceso de producción hasta ofrecer total transparencia sobre los ingredientes y el origen del café que utilizamos. Nos esforzamos por mantener altos estándares de calidad y honestidad en todo lo que hacemos.</p>
+                </div>
+                
+                <div class="vision-card">
+                    <h3>Colores</h3>
+                    <p><strong>Café:</strong> Este color identifica uno de los ingredientes principales de nuestro producto, hace referencia al color,sabor y olor de nuestro yogurt</p><br>
+                    <p><strong>Blanco:</strong> El color blanco en nuestro yogurt representa la riqueza y pureza de nuestro producto más preciado y cuidadosamente tratado, la leche.</p><br>
+                    <p><strong>Vinotinto:</strong> Representa la madurez de cada grano de nuestro café, cuidadosamente seleccionado por la manos de campesinos caficultores de nuestro municipio, para darle a nuestro yogurt un sabor excepcional</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="productos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestras presentaciones</h2>
+                <p>Elaborados con el mayor cuidado y las mejores materias primas</p>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Yogurt Griego Andino -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('P1.jpeg');"></div>
+                    <div class="product-info">
+                        <h3>Presentación 300 ml</h3>
+                        <p><strong>Ingredientes:</strong> Leche fresca pasteurizada, cultivo láctico, café artesanal seleccionado, estevia, estabilizantes naturales.</p>
+<p><strong>Contenido neto:</strong> 300 ml</p>
+<p><strong>Conservación:</strong> Refrigerado entre 2°C y 6°C</p>
+<p><strong>Vida útil:</strong> 15-20 días</p>
+<p><strong>Envase:</strong> Botella de vidrio</p>
+                        <a href="#" class="btn">Encuentra en tu municipio</a>
+                    </div>
+                </div>
+                
+                <!-- Queso Fresco Artesanal -->
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('P2.jpeg');"></div>
+                    <div class="product-info">
+                        <h3>Presentación 1.5 lt</h3>
+                        <p><strong>Ingredientes:</strong> Leche fresca pasteurizada, cultivo láctico, café artesanal seleccionado, estevia, estabilizantes naturales.</p>
+<p><strong>Contenido neto:</strong> 1.5 L</p>
+<p><strong>Conservación:</strong> Refrigerado entre 2°C y 6°C</p>
+<p><strong>Vida útil:</strong> 15-20 días</p>
+<p><strong>Envase:</strong> Botella de vidrio</p>
+                        <a href="#" class="btn">Encuentra en tu municipio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+    <!-- Impact Section -->
+    <section id="impacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Testimonios</h2>
+            </div>
+            
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>"Trabajar en Yogurt Cafeteros es un orgullo. Desde que empezamos, quisimos fusionar el café de las montañas colombianas con la suavidad del yogurt artesanal. No usamos conservantes ni saborizantes artificiales: cada frasco lleva granos de café tostados por nosotros mismos y leche de vacas criadas en pastoreo. Ver cómo nuestros clientes cierran los ojos al probarlo… eso no tiene precio. Es como servir una taza de café recién hecho, pero en versión cremosa. ¡Así nos gusta!"</p>
+                    <div class="testimonial-author">- Carlos Méndez, Maestro yogurttero</div>
+                </div>
+                <div class="testimonial">
+                    <p>"En Yogurt Cafeteros, la calidad es sagrada. Probamos cada lote para asegurarnos de que el sabor a café sea intenso pero equilibrado, sin ahogar la frescura del yogurt. Lo más bonito es que trabajamos con caficultores locales, lo que le da un toque único a cada cosecha. Hacemos todo en pequeñas cantidades, como debe ser lo artesanal: si no pasa por nuestras manos, no llega al cliente. Y eso se nota en cada cucharada."</p>
+                    <div class="testimonial-author">- Ana Lucía Ramírez, Supervisora de calidad</div>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"Soy adicta al yogurt de café, pero hasta que descubrí Yogurt Cafeteros, no había encontrado uno que supiera auténtico. ¡Es cremoso, no demasiado dulce, y se siente el amarguito del café de verdad! Me encanta que apoyen a productores locales y que cuiden los ingredientes. Siempre llevo dos botellas: uno para mí y otro para regalar. Hasta mi abuela, que no es de probar cosas nuevas, ¡ahora lo pide en el desayuno!"</p>
+                    <div class="testimonial-author">- María Fernanda Soto, Clienta</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" style="background-color: var(--light-green);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacto</h2>
+                <p>Estamos aquí para atenderte</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Para Distribuidores</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="company">Nombre de la empresa</label>
+                            <input type="text" id="company" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dist-email">Correo electrónico</label>
+                            <input type="email" id="dist-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="region">Región de interés</label>
+                            <select id="region">
+                                <option value="">Selecciona una región</option>
+                                <option value="cundinamarca">Cundinamarca</option>
+                                <option value="boyaca">Boyacá</option>
+                                <option value="norte">Norte</option>
+                                <option value="sur">Sur</option>
+                                <option value="este">Este</option>
+                                <option value="oeste">Oeste</option>
+                                <option value="central">Central</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar solicitud</button>
+                    </form>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Formulario de Empleo</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emp-email">Correo electrónico</label>
+                            <input type="email" id="emp-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Puesto de interés</label>
+                            <select id="position">
+                                <option value="">Selecciona un puesto</option>
+                                <option value="produccion">Producción</option>
+                                <option value="calidad">Control de calidad</option>
+                                <option value="distribucion">Distribución</option>
+                                <option value="ventas">Ventas</option>
+                                <option value="administracion">Administración</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Experiencia</label>
+                            <textarea id="experience"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cv">Adjuntar CV</label>
+                            <input type="file" id="cv">
+                        </div>
+                        <button type="submit" class="btn">Enviar solicitud</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+    <button id="scrollTop" aria-label="Volver arriba">↑</button>
+    <script>
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <!-- Footer -->
+    <footer class="footer-container">
+        <div class="footer-content">
+            <!-- Sección de Contacto -->
+            <div class="footer-section">
+                <h4>Contacto Directo</h4>
+                <ul class="footer-list">
+                    <li>📧 Email: <a href="mailto:info@yogurtcafeteros.org">info@yogurtcafeteros.org</a></li>
+                    <li>📞 Teléfono: +57 (1) 234 5678</li>
+                    <li>📍 Dirección: Carrera 7 #45-21, Bogotá D.C., Colombia</li>
+                </ul>
+            </div>
+    
+            <!-- Redes Sociales -->
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-media">
+                    <a href="https://facebook.com" target="_blank" class="social-icon">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://wa.me/573178520311" target="_blank" class="social-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Información Legal -->
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-list">
+                    <li><a href="pages/privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="pages/terminos.html">Términos de Uso</a></li>
+                    <li><a href="pages/cookies.html">Política de Cookies</a></li>
+                    <li>NIT: 901.234.567-8</li>
+                </ul>
+            </div>
+        </div>
+    
+        <!-- Derechos de autor -->
+        <div class="copyright">
+            <p>© 2024 Yogurt Cafeteros S.A.S. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    </html>
